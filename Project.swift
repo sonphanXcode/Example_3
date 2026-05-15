@@ -5,8 +5,8 @@ private let version: String = "0.0.1"
 private let bundleVersion: String = "1"
 private let iOSTargetVersion: String = "16.0"
 
-private let basePath: String = "Targets/PTest3"
-private let appName = "PTest3"
+private let basePath: String = "Test3"
+private let appName = "Test3"
 
 let project = Project(name: appName,
                       packages: [],
@@ -14,7 +14,8 @@ let project = Project(name: appName,
                       targets: [
                         .target(name: "iOS",
                                 destinations: [.iPhone],
-                                product: .app, bundleId: bundleId,
+                                product: .app,
+                                bundleId: bundleId,
                                 deploymentTargets: .iOS(iOSTargetVersion),
                                 infoPlist: makeInfoPlist(),
                                 sources: ["\(basePath)/Sources/**"],
@@ -41,7 +42,7 @@ private func makeInfoPlist(merging other: [String : Plist.Value] = [:]) -> InfoP
                      "UISupportedInterfaceOrientations": .array([.string("UIInterfaceOrientationPortrait")]),
                      "CFBundleShortVersionString": .string(version),
                      "CFBundleVersion": .string(bundleVersion),
-                     "CFBundleDisplayName": .string(appName)
+                     "CFBundleDisplayName": .string("$(APP_DISPLAY_NAME)")
                     ]
     other.forEach { (key: String, value: Plist.Value) in
         extendedPlist[key] = value
