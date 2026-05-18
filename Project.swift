@@ -7,9 +7,13 @@ private let iOSTargetVersion: String = "16.0"
 
 private let basePath: String = "Test3"
 private let appName = "Test3"
+private let swiftPakagePath: String = "SwiftPackages"
 
 let project = Project(name: appName,
-                      packages: [],
+                      packages: [
+                        .package(path: "\(swiftPakagePath)/Onboarding"),
+                        .package(path: "\(swiftPakagePath)/UIComponents")
+                      ],
                       settings: Settings.settings(configurations: makeConfigurations()),
                       targets: [
                         .target(name: "iOS",
@@ -20,6 +24,10 @@ let project = Project(name: appName,
                                 infoPlist: makeInfoPlist(),
                                 sources: ["\(basePath)/Sources/**"],
                                 resources: ["\(basePath)/Resources/**"],
+                                dependencies: [
+                                    .package(product: "Onboarding"),
+                                    .package(product: "UIComponents")
+                                ],
                                 settings: baseSettings()
                                )
                       ],
